@@ -1,0 +1,8 @@
+//Firebase project settings:
+REACT_APP_APIKEY = ".................."
+REACT_APP_AUTHDOMAIN = ".................."
+REACT_APP_DB = ".................."
+REACT_APP_PID = ".................."
+REACT_APP_SB = ".................."
+REACT_APP_SID = ".................."
+REACT_APP_APPID = ".................."

@@ -17,7 +17,7 @@ export default function App() {
 		<Routes>
 			<Route path="/admin" element={ <Page item="admin" /> } />
 			<Route path="/daycard" element={ <Page item="daycard" /> } />
-			<Route path="/" element={ <Navigate to={"/daycard"} /> } />
+			<Route path="/" element={ <Page /> } />
 			<Route path="*" element={ <Navigate to={"/"} /> } />
 		</Routes>
 		<Footer />

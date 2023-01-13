@@ -50,7 +50,7 @@ export const Navbar = ({ className, ...props }: NavbarProps): JSX.Element => {
 					</div>
 				}
 				{
-					!menuOpened &&
+					!menuOpened && login.logged &&
 
 					<div className="flex">
 						<IconButton

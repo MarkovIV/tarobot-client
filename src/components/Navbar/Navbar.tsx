@@ -2,18 +2,14 @@ import { NavbarProps } from './Navbar.props'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import LogoutIcon from '@mui/icons-material/Logout'
-import Typography from '@mui/material/Typography'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { toggleMenuTo } from '../../store/menuSlice'
 import { toggleLoginTo, ILoginState } from '../../store/loginSlice'
 import { authUser } from '../../firebase/firebase'
-import { pageData } from '../../data/data.page'
-import { indexOfItem } from '../../helpers/helpers'
 
 export const Navbar = ({ className, ...props }: NavbarProps): JSX.Element => {
 	const menuOpened = useAppSelector(state => state.menu.open)
 	const login = useAppSelector(state => state.login)
-	const slide = useAppSelector(state => state.slide.item)
 	const dispatch = useAppDispatch()
 
 	return (

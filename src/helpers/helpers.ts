@@ -1,4 +1,3 @@
-import { stringify } from 'querystring'
 import { pageData } from '../data/data.page'
 
 export const indexOfItem = (item: string): number => {

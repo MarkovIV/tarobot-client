@@ -34,6 +34,7 @@ export const Page = ({ item = "daycard", className, ...props }: PageProps): JSX.
 					email: email
 				}
 				dispatch(toggleLoginTo(loginState))
+				window.location.reload()
 
 			} else {
 				const loginState: ILoginState = {

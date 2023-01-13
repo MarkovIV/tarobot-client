@@ -24,6 +24,7 @@ export const Admin = ({ className, ...props }: AdminProps): JSX.Element => {
 	const [openEditClientWindow, setOpenEditClientWindow] = useState<boolean>(false)
 	const [modalMessage, setModalMessage] = useState<string>('')
 	const [selectionModelState, setSelectionModelState] = useState<GridRowId[]>([])
+	const login = useAppSelector(state => state.login)
 	
 	const handleOpenAddClientWindow = () => setOpenAddClientWindow(true)
 
@@ -84,6 +85,7 @@ export const Admin = ({ className, ...props }: AdminProps): JSX.Element => {
 
 	return (
 		<div>
+			{ login.logged &&
 			<div className="absolute left-0 top-0 flex flex-col items-center justify-center flex-nowrap w-full h-full min-w-[350px] min-h-[350px]">
 				<div className="h-1/6 w-full flex justify-center items-center">
 					<Typography
@@ -165,8 +167,9 @@ export const Admin = ({ className, ...props }: AdminProps): JSX.Element => {
 				</div>
 				<div className="h-1/6 w-full"></div>
 			</div>
+			}
 			<Modal
-				open={openAddClientWindow}
+				open={openAddClientWindow && login.logged}
 				onClose={handleCloseAddClientWindow}
 				aria-labelledby="modal-modal-title"
 				aria-describedby="modal-modal-description"
@@ -197,7 +200,7 @@ export const Admin = ({ className, ...props }: AdminProps): JSX.Element => {
 				</Box>
 			</Modal>
 			<Modal
-				open={openEditClientWindow}
+				open={openEditClientWindow && login.logged}
 				onClose={handleCloseEditClientWindow}
 				aria-labelledby="modal-modal-title"
 				aria-describedby="modal-modal-description"
@@ -228,7 +231,7 @@ export const Admin = ({ className, ...props }: AdminProps): JSX.Element => {
 				</Box>
 			</Modal>
 			<Modal
-				open={openDeleteWindow}
+				open={openDeleteWindow && login.logged}
 				onClose={handleCloseDeleteWindow}
 				aria-labelledby="modal-modal-title"
 				aria-describedby="modal-modal-description"
@@ -290,7 +293,10 @@ export const Admin = ({ className, ...props }: AdminProps): JSX.Element => {
 					</div>
 				</Box>
 			</Modal>
-			<ModalMessage message={modalMessage} close={closeModalMessage} />
+			{	
+				login.logged &&
+				<ModalMessage message={modalMessage} close={closeModalMessage} />
+			}
 		</div>
 	)
 }

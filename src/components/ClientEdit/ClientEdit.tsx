@@ -27,6 +27,7 @@ export const ClientEdit = ({ onClose, clientId, className, ...props }: ClientEdi
 	const [daycards, setDaycards] = useState<IDayCard[]>()
 	const [greatingEdited, setGreatingEdited] = useState<boolean>(false)
 	const clients = useAppSelector(state => state.clients.clients)
+	const login = useAppSelector(state => state.login)
 
 	useEffect(() => {
 		if (clientId !== undefined) {
@@ -45,6 +46,11 @@ export const ClientEdit = ({ onClose, clientId, className, ...props }: ClientEdi
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
+
+	useEffect(() => {
+		if (!login.logged) onClose()
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [login.logged])
 
 	useEffect(() => {
 		if (!greatingEdited) {

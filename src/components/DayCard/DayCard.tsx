@@ -47,6 +47,7 @@ export const DayCard = ({ className, ...props }: DayCardProps): JSX.Element => {
 	const [modalMessage, setModalMessage] = useState<string>('')
 	const [selectionModelState, setSelectionModelState] = useState<GridRowId[]>([])
 	const [date, setDate] = useState<Dayjs | null>(dayjs())
+	const login = useAppSelector(state => state.login)
 
 	const handleOpenDeleteWindow = () => {
 		if (selectionModelState.length === 0) {
@@ -183,6 +184,7 @@ export const DayCard = ({ className, ...props }: DayCardProps): JSX.Element => {
 
 	return (
 		<div>
+			{login.logged &&
 			<div className="absolute left-0 top-0 flex flex-col items-center justify-center flex-nowrap w-full h-full min-w-[350px] min-h-[350px]">
 				<div className="h-1/6 w-full flex-col justify-center items-center">
 					<div className="flex w-full justify-center items-center pt-[40px]">
@@ -291,9 +293,10 @@ export const DayCard = ({ className, ...props }: DayCardProps): JSX.Element => {
 				</div>
 				<div className="h-1/6 w-full"></div>
 			</div>
+			}
 			<Dialog
 				fullScreen
-				open={openEditDaycardWindow}
+				open={openEditDaycardWindow && login.logged}
 				onClose={handleCloseEditDaycardWindow}
 				TransitionComponent={Transition}
 			>
@@ -337,7 +340,7 @@ export const DayCard = ({ className, ...props }: DayCardProps): JSX.Element => {
 			</Dialog>
 			<Dialog
 				fullScreen
-				open={openViewDaycardWindow}
+				open={openViewDaycardWindow && login.logged}
 				onClose={handleCloseViewDaycardWindow}
 				TransitionComponent={Transition}
 			>
@@ -380,7 +383,7 @@ export const DayCard = ({ className, ...props }: DayCardProps): JSX.Element => {
 				<DaycardEdit onClose={handleCloseViewDaycardWindow} clientId={String(selectionModelState[0])} date={date} view={openViewDaycardWindow} />
 			</Dialog>
 			<Modal
-				open={openDeleteWindow}
+				open={openDeleteWindow && login.logged}
 				onClose={handleCloseDeleteWindow}
 				aria-labelledby="modal-modal-title"
 				aria-describedby="modal-modal-description"
@@ -443,7 +446,7 @@ export const DayCard = ({ className, ...props }: DayCardProps): JSX.Element => {
 				</Box>
 			</Modal>
 			<Modal
-				open={openEditDateWindow}
+				open={openEditDateWindow && login.logged}
 				onClose={handleCloseChangeDateWindow}
 				aria-labelledby="modal-modal-title"
 				aria-describedby="modal-modal-description"
@@ -473,7 +476,9 @@ export const DayCard = ({ className, ...props }: DayCardProps): JSX.Element => {
 					</LocalizationProvider>
 				</Box>
 			</Modal>
-			<ModalMessage message={modalMessage} close={closeModalMessage} />
+			{	login.logged &&
+				<ModalMessage message={modalMessage} close={closeModalMessage} />
+			}
 		</div>
 	)
 }

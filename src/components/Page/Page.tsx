@@ -76,65 +76,6 @@ export const Page = ({ item = "daycard", className, ...props }: PageProps): JSX.
 			<div className="absolute left-0 top-0 flex justify-start items-start flex-nowrap w-full h-full min-w-[350px] min-h-[350px]">
 				<img className="object-cover w-full h-full" src={pageData[indexOfItem(slide)].background} alt="Background" />
 			</div>
-
-
-
-				{/* <div>
-					<div className="absolute left-0 top-0 flex flex-col items-center justify-center flex-nowrap w-full h-full min-w-[350px] min-h-[350px]">
-						<div className="h-1/6 w-full"></div>
-						<div className="h-4/6 w-full md:w-3/4 lg:w-4/12 flex items-center justify-center flex-col pl-3 pr-3">
-							<CardActionArea>
-								<div className="h-4/6 w-full flex items-start justify-start flex-col">
-									<img className={cn("object-cover w-full h-full rounded-t-md opacity-60", animation)} src={slideData[state].image} alt="Card" />
-								</div>
-								<div className="h-2/6 w-full flex items-center justify-center flex-col bg-gradient-to-r from-blue-300/80 to-gray-700/80 rounded-b-md">
-									<div className="h-1/4 w-full flex items-start justify-start flex-col p-3">
-										<Typography gutterBottom variant="h5" component="div" color="#e0e0e0">
-											{slideData[state].title}
-										</Typography>
-									</div>
-									<div className="h-2/4 w-full flex items-start justify-start flex-col p-3">
-										<Typography variant="body2" color="#e0e0e0">
-											{slideData[state].description}
-										</Typography>
-									</div>
-									<div className="h-1/4 w-full flex items-end justify-end flex-col text-gray-300">
-										<CardActions>
-											<Button
-												size="small"
-												color='inherit'
-												onClick={() => {
-													dispatch(openArticle(true))
-													dispatch(interestedSet(true))
-												}}
-											>	
-												Подробнее
-											</Button>
-										</CardActions>
-									</div>
-								</div>
-							</CardActionArea>
-						</div>
-						<div className="h-1/6 w-full"></div>
-					</div>
-					<div className="absolute inset-y-1/2 left-0 flex justify-center items-center opacity-70">
-						<CardActionArea>
-							<NavigateBeforeIcon
-								sx={{width: '100px', height: '100px', color: '#c5cae9', }}
-								onMouseDown={() => dispatch(toPrevSlide())}
-							/>
-						</CardActionArea>
-					</div>
-					<div className="absolute inset-y-1/2 right-0 flex justify-center items-center opacity-70">
-						<CardActionArea>
-							<NavigateNextIcon
-								sx={{width: '100px', height: '100px', color: '#c5cae9', }}
-								onMouseDown={() => dispatch(toNextSlide())}
-							/>
-						</CardActionArea>
-					</div>
-				</div> */}
-
 			{
 				!login.logged && <Login />
 			}

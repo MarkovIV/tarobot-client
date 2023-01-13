@@ -19,7 +19,7 @@ import ChatIcon from '@mui/icons-material/Chat'
 import CheckIcon from '@mui/icons-material/Check'
 import dayjs, { Dayjs } from 'dayjs'
 import { useAppSelector } from '../../store/hooks'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { daycardsRef, storage, uploadFile, deleteFilesFromStorage, getClientDayCardKey } from '../../firebase/firebase'
 import AudioPlayer from 'react-h5-audio-player'
 import 'react-h5-audio-player/lib/styles.css'
@@ -52,6 +52,12 @@ export const DaycardEdit = ({ onClose, view, clientId, date, className, ...props
 	const clients = useAppSelector(state => state.clients.clients)
 	const [expanded, setExpanded] = useState<string | false>(false)
 	const photoRef = useRef(null)
+	const login = useAppSelector(state => state.login)
+
+	useEffect(() => {
+		if (!login.logged) onClose()
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [login.logged])
 
 	const updatePhotoSizes = () => {
 		const photo = photoRef.current as HTMLElement | null

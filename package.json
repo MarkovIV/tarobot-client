@@ -30,6 +30,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.2",
     "save": "^2.9.0",
+    "telegram-webapps-types": "^1.0.5",
     "typescript": "^4.9.4"
   },
   "scripts": {

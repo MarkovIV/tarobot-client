@@ -8,10 +8,13 @@ import { pageData } from '../../data/data.page'
 import { indexOfItem } from '../../helpers/helpers'
 import { Admin } from '../Admin/Admin'
 import { DayCard } from '../DayCard/DayCard'
+import { Telegram } from '../Telegram/Telegram'
 import { Login } from '../Login/Login'
 import { Loader } from '../Loader/Loader'
 import { authUser, daycardsRef } from '../../firebase/firebase'
 import { IClient } from '../../interfaces/client.interface'
+
+const tg = window.Telegram.WebApp
 
 export const Page = ({ item = "daycard", className, ...props }: PageProps): JSX.Element => {
 	const slide = useAppSelector(state => state.slide.item)
@@ -21,6 +24,9 @@ export const Page = ({ item = "daycard", className, ...props }: PageProps): JSX.
 
 	useEffect(() => {
 		dispatch(toggleSlideTo(item))
+
+		tg.ready()
+		// console.log(tg.initData)
 
 		authUser.onAuthStateChanged( user => {
 			if (user) {
@@ -77,6 +83,9 @@ export const Page = ({ item = "daycard", className, ...props }: PageProps): JSX.
 			<div className="absolute left-0 top-0 flex justify-start items-start flex-nowrap w-full h-full min-w-[350px] min-h-[350px]">
 				<img className="object-cover w-full h-full" src={pageData[indexOfItem(slide)].background} alt="Background" />
 			</div>
+			{
+				!login.logged && tg.initData && <Telegram />
+			}
 			{
 				!login.logged && <Login />
 			}

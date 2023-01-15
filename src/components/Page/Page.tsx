@@ -87,7 +87,7 @@ export const Page = ({ item = "daycard", className, ...props }: PageProps): JSX.
 				!login.logged && tg.initData && <Telegram />
 			}
 			{
-				!login.logged && <Login />
+				!login.logged && !tg.initData && <Login />
 			}
 			{
 				!login.logged && loader && <Loader />

@@ -20,14 +20,10 @@ export const Page = ({ item = "daycard", className, ...props }: PageProps): JSX.
 	const login = useAppSelector(state => state.login)
 	const loader = useAppSelector(state => state.loader.loader)
 	const dispatch = useAppDispatch()
-	const { tg, queryId } = useTelegram()
+	const { tg } = useTelegram()
 
 	useEffect(() => {
 		dispatch(toggleSlideTo(item))
-
-		//debug
-		console.log('TG', tg)
-		console.log('QUERY_ID', queryId)
 
 		tg.ready()
 
@@ -87,10 +83,10 @@ export const Page = ({ item = "daycard", className, ...props }: PageProps): JSX.
 				<img className="object-cover w-full h-full" src={pageData[indexOfItem(slide)].background} alt="Background" />
 			</div>
 			{
-				!login.logged && tg.initData && <Telegram />
+				!login.logged && (tg.platform !== 'unknown') && <Telegram />
 			}
 			{
-				!login.logged && !tg.initData && <Login />
+				!login.logged && (tg.platform === 'unknown') && <Login />
 			}
 			{
 				!login.logged && loader && <Loader />

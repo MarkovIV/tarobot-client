@@ -6,13 +6,16 @@ import { useTelegram } from '../../hooks/useTelegram'
 import { useEffect } from 'react'
 
 export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element => {
-	const { onClose, tg, queryId, user } = useTelegram()
+	const { onClose, tg, queryId, user, onToggleButton } = useTelegram()
 
-	//debug
+	
 	useEffect(() => {
+		//debug
 		console.log('tg', tg)
 		console.log('queryId', queryId)
 		console.log('user', user)
+
+		onToggleButton()
 	}, [])
 
 	return (

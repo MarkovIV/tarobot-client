@@ -29,7 +29,7 @@ export const Page = ({ item = "daycard", className, ...props }: PageProps): JSX.
 		console.log('TG', tg)
 		console.log('QUERY_ID', queryId)
 
-		// tg.ready()
+		tg.ready()
 
 		authUser.onAuthStateChanged( user => {
 			if (user) {

@@ -3,9 +3,17 @@ import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import LoginIcon from '@mui/icons-material/Login'
 import { useTelegram } from '../../hooks/useTelegram'
+import { useEffect } from 'react'
 
 export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element => {
-	const { onClose } = useTelegram()
+	const { onClose, tg, queryId, user } = useTelegram()
+
+	//debug
+	useEffect(() => {
+		console.log('tg', tg)
+		console.log('queryId', queryId)
+		console.log('user', user)
+	}, [])
 
 	return (
 		<div className="absolute left-0 top-0 flex flex-col items-center justify-center flex-nowrap w-full h-full min-w-[350px] min-h-[350px]">

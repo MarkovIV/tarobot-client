@@ -10,7 +10,8 @@ import { Navbar } from './components/Navbar/Navbar'
 import { Page } from './components/Page/Page'
 
 export default function App() {
-  return (
+
+	return (
 	<>
 		<Navbar />
 		<MenuList />
@@ -22,5 +23,5 @@ export default function App() {
 		</Routes>
 		<Footer />
 	</>
-  )
+	)
 }

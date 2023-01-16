@@ -22,7 +22,6 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 			is_active: true,
 			is_visible: true
 		})
-		tg.MainButton.showProgress()
 		tg.onEvent('mainButtonClicked', onClose)
 
 		return () => {

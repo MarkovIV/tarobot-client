@@ -13,20 +13,23 @@ import { Login } from '../Login/Login'
 import { Loader } from '../Loader/Loader'
 import { authUser, daycardsRef } from '../../firebase/firebase'
 import { IClient } from '../../interfaces/client.interface'
-
-const tg = window.Telegram.WebApp
+import { useTelegram } from '../../hooks/useTelegram'
 
 export const Page = ({ item = "daycard", className, ...props }: PageProps): JSX.Element => {
 	const slide = useAppSelector(state => state.slide.item)
 	const login = useAppSelector(state => state.login)
 	const loader = useAppSelector(state => state.loader.loader)
 	const dispatch = useAppDispatch()
+	const { tg, queryId } = useTelegram()
 
 	useEffect(() => {
 		dispatch(toggleSlideTo(item))
 
-		tg.ready()
-		// console.log(tg.initData)
+		//debug
+		console.log('TG', tg)
+		console.log('QUERY_ID', queryId)
+
+		// tg.ready()
 
 		authUser.onAuthStateChanged( user => {
 			if (user) {

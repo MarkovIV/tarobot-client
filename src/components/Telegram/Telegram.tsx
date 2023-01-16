@@ -2,14 +2,18 @@ import { TelegramProps } from './Telegram.props'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import LoginIcon from '@mui/icons-material/Login'
-
-const tg = window.Telegram.WebApp
+import { useTelegram } from '../../hooks/useTelegram'
+import { useEffect } from 'react'
 
 export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element => {
+	const { onClose, tg, queryId } = useTelegram()
 
-	const onTelegram = () => {
-		tg.close()
-	}
+	//debug
+	useEffect(() => {
+		console.log('tg', tg)
+		console.log('queryId', queryId)
+
+	}, [tg, queryId])
 
 	return (
 		<div className="absolute left-0 top-0 flex flex-col items-center justify-center flex-nowrap w-full h-full min-w-[350px] min-h-[350px]">
@@ -21,7 +25,7 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 						edge="start"
 						color="inherit"
 						aria-label="telegram"
-						onClick={onTelegram}
+						onClick={onClose}
 					>
 						<LoginIcon sx={{ fill: '#e0e0e0', }}/>
 						<Typography

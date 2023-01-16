@@ -17,12 +17,12 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 
 		tg.MainButton.setParams({
 			text: 'Close',
-			color: 'black',
-			text_color: 'white',
+			color: '#000000',
+			text_color: '#FFFFFF',
 			is_active: true,
 			is_visible: true
 		})
-		tg.MainButton.showProgress()
+		tg.MainButton.showProgress(true)
 		tg.onEvent('mainButtonClicked', onClose)
 
 		return () => {

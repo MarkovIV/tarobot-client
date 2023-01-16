@@ -6,7 +6,7 @@ import { useTelegram } from '../../hooks/useTelegram'
 import { useEffect } from 'react'
 
 export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element => {
-	const { onClose, tg, queryId, user, onToggleButton } = useTelegram()
+	const { onClose, tg, queryId, user } = useTelegram()
 
 	
 	useEffect(() => {
@@ -15,7 +15,18 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 		console.log('queryId', queryId)
 		console.log('user', user)
 
-		onToggleButton()
+		tg.MainButton.setParams({
+			text: 'Close',
+			color: 'black',
+			text_color: 'white',
+			is_active: true,
+			is_visible: true
+		})
+		tg.MainButton.showProgress(leaveActive)
+
+		return () => {
+			tg.offEvent('mainButtonClicked', onClose)
+		}
 	}, [])
 
 	return (

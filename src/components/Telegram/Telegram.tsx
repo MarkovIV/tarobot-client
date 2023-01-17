@@ -23,10 +23,10 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 			firstName: ''
 		}
 
-		const tgClient = clients.find(cl => cl.telegram === tgName)
+		const tgClient = clients.find(cl => String(cl.telegram) === tgName)
 		if (tgClient) {
-			clientData.id = tgClient.id
-			clientData.firstName = tgClient.firstName
+			clientData.id = String(tgClient.id)
+			clientData.firstName = String(tgClient.firstName)
 		}
 
 		return clientData

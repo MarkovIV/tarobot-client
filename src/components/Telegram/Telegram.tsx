@@ -8,14 +8,14 @@ import { Navigate } from 'react-router-dom'
 
 export const Telegram = ({ daycard='', className, ...props }: TelegramProps): JSX.Element => {
 	const { onClose, tg, user } = useTelegram()
-	const daycardParams = JSON.parse(daycard)
+	// const daycardParams = JSON.parse(daycard)
 
 	useEffect(() => {
 		tg.ready()
 
 		//debug
-		console.log('daycardParams', daycardParams)
-	}, [daycardParams, tg])
+		console.log('daycardParams', daycard)
+	}, [daycard, tg])
 
 	useEffect(() => {
 		tg.MainButton.hide()

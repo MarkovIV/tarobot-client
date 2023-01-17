@@ -18,6 +18,7 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 		tg.MainButton.hide()
 		tg.MainButton.disable()
 		tg.MainButton.hideProgress()
+		tg.expand()
 
 		return () => {
 			

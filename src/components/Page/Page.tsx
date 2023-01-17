@@ -8,24 +8,19 @@ import { pageData } from '../../data/data.page'
 import { indexOfItem } from '../../helpers/helpers'
 import { Admin } from '../Admin/Admin'
 import { DayCard } from '../DayCard/DayCard'
-import { Telegram } from '../Telegram/Telegram'
 import { Login } from '../Login/Login'
 import { Loader } from '../Loader/Loader'
 import { authUser, daycardsRef } from '../../firebase/firebase'
 import { IClient } from '../../interfaces/client.interface'
-import { useTelegram } from '../../hooks/useTelegram'
 
 export const Page = ({ item = "daycard", className, ...props }: PageProps): JSX.Element => {
 	const slide = useAppSelector(state => state.slide.item)
 	const login = useAppSelector(state => state.login)
 	const loader = useAppSelector(state => state.loader.loader)
 	const dispatch = useAppDispatch()
-	const { tg } = useTelegram()
 
 	useEffect(() => {
 		dispatch(toggleSlideTo(item))
-
-		tg.ready()
 
 		authUser.onAuthStateChanged( user => {
 			if (user) {
@@ -83,10 +78,7 @@ export const Page = ({ item = "daycard", className, ...props }: PageProps): JSX.
 				<img className="object-cover w-full h-full" src={pageData[indexOfItem(slide)].background} alt="Background" />
 			</div>
 			{
-				!login.logged && (tg.platform !== 'unknown') && <Telegram />
-			}
-			{
-				!login.logged && (tg.platform === 'unknown') && <Login />
+				!login.logged && <Login />
 			}
 			{
 				!login.logged && loader && <Loader />

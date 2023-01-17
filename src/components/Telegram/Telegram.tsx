@@ -4,19 +4,25 @@ import { useTelegram } from '../../hooks/useTelegram'
 import { useEffect } from 'react'
 import dayjs from 'dayjs'
 import { DaycardEdit } from '../DaycardEdit/DaycardEdit'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 
-export const Telegram = ({ daycard='', className, ...props }: TelegramProps): JSX.Element => {
+export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element => {
 	const { onClose, tg, user } = useTelegram()
+	const params = useParams()
+	const daycardParams = params.daycardParams
 	// const daycardParams = JSON.parse(daycard)
+
+	//debug
+	useEffect(() => {
+		
+		console.log('params', params)
+		console.log('daycardParams', daycardParams)
+
+	}, [daycardParams, params])
 
 	useEffect(() => {
 		tg.ready()
-
-		//debug
-		console.log('daycardParams', daycard)
-		
-	}, [daycard, tg])
+	}, [tg])
 
 	useEffect(() => {
 		tg.MainButton.hide()

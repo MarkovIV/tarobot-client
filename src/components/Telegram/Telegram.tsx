@@ -18,13 +18,19 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 		tg.MainButton.disable()
 		tg.MainButton.hideProgress()
 		tg.expand()
-	}, [tg])
+	}, [tg, user.username])
 
 	const getClientDataByTgName = (tgName: string) => {
 		let clientData = {
 			id: '',
 			firstName: ''
 		}
+
+		//debug
+		clients.forEach(el => {
+			console.log(el)
+			console.log(String(el.telegram))
+		})
 
 		const tgClient = clients.find(cl => String(cl.telegram) === tgName)
 		if (tgClient) {

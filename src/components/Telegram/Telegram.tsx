@@ -10,15 +10,18 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 	const { onClose, tg, user } = useTelegram()
 	const params = useParams()
 	const daycardParams = params.daycardParams
-	// const daycardParams = JSON.parse(daycard)
+
+	let decodedDayCardParams = {}
+	if (daycardParams) {
+		decodedDayCardParams = JSON.parse(decodeURIComponent(daycardParams))
+	}
 
 	//debug
 	useEffect(() => {
-		
 		console.log('params', params)
 		console.log('daycardParams', daycardParams)
-
-	}, [daycardParams, params])
+		console.log('decodedDayCardParams', decodedDayCardParams)
+	}, [])
 
 	useEffect(() => {
 		tg.ready()

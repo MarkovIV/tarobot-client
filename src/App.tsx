@@ -9,10 +9,18 @@ import { MenuList } from './components/MenuList/MenuList'
 import { Navbar } from './components/Navbar/Navbar'
 import { Page } from './components/Page/Page'
 import { Telegram } from './components/Telegram/Telegram'
+import { useEffect } from 'react'
 
 export default function App() {
 	const params = useParams()
 	const daycardParams = params.daycardParams
+
+	useEffect(() => {
+		//debug
+		console.log('router params', params)
+		console.log('router daycardParams', daycardParams)
+
+	}, [daycardParams, params])
 
 	return (
 	<>

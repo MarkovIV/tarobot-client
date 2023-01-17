@@ -15,6 +15,7 @@ export const Telegram = ({ daycard='', className, ...props }: TelegramProps): JS
 
 		//debug
 		console.log('daycardParams', daycard)
+		
 	}, [daycard, tg])
 
 	useEffect(() => {

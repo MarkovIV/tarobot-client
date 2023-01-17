@@ -27,11 +27,8 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 		}
 
 		//debug
-		clients.forEach(el => {
-			console.log(el)
-			console.log(String(el.telegram))
-		})
-
+		console.log('clients', clients)
+	
 		const tgClient = clients.find(cl => String(cl.telegram) === tgName)
 		if (tgClient) {
 			clientData.id = String(tgClient.id)

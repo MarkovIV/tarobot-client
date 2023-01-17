@@ -11,6 +11,9 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 	const clients = useAppSelector(state => state.clients.clients)
 
 	useEffect(() => {
+		//debug
+		console.log('user.username', user.username)
+		
 		tg.MainButton.hide()
 		tg.MainButton.disable()
 		tg.MainButton.hideProgress()
@@ -28,6 +31,9 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 			clientData.id = String(tgClient.id)
 			clientData.firstName = String(tgClient.firstName)
 		}
+
+		//debug
+		console.log(clientData)
 
 		return clientData
 	}

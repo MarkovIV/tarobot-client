@@ -15,17 +15,12 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 		console.log('queryId', queryId)
 		console.log('user', user)
 
-		tg.MainButton.setParams({
-			text: 'Close',
-			color: '#FFFFFF',
-			text_color: '#000000',
-			is_active: true,
-			is_visible: true
-		})
-		tg.onEvent('mainButtonClicked', onClose)
+		tg.MainButton.hide()
+		tg.MainButton.disable()
+		tg.MainButton.hideProgress()
 
 		return () => {
-			tg.offEvent('mainButtonClicked', onClose)
+			
 		}
 	}, [])
 

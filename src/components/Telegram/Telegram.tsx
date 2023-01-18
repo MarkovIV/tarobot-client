@@ -13,13 +13,13 @@ const testURL = 'https://firebasestorage.googleapis.com/v0/b/tarobot-a9b31.appsp
 export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element => {
 	const [daycardURL, setDayCardURL] = useState<string>('')
 	const {onClose, tg, user} = useTelegram()
-	const params = useParams()
-	const daycardParams = params.daycardParams
+	// const params = useParams()
+	// const daycardParams = params.daycardParams
 
-	let decodedDayCardParams = {}
-	if (daycardParams) {
-		decodedDayCardParams = JSON.parse(decodeURIComponent(daycardParams))
-	}
+	// let decodedDayCardParams = {}
+	// if (daycardParams) {
+	// 	decodedDayCardParams = JSON.parse(decodeURIComponent(daycardParams))
+	// }
 
 	useEffect(() => {
 		async function fetchData() {

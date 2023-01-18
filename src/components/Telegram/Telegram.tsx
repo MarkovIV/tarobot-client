@@ -25,12 +25,12 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 		async function fetchData() {
 			const res = await axios.get(testURL)
 			setDayCardURL(res.data)
+
+			//debug
+			console.log('daycardURL', res.data)
 		}
 		fetchData()
 
-		//debug
-		console.log('daycardURL', daycardURL)
-		
 		tg.MainButton.hide()
 		tg.MainButton.disable()
 		tg.MainButton.hideProgress()

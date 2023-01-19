@@ -151,12 +151,9 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 		<div>
 			{
 				(tg.platform !== 'unknown') &&
-
 				<div className="bg-repeat bg-[url(./pics/stars.jpg)]">
-
-					<div className="flex justify-start items-start w-full h-full min-w-[350px] min-h-[350px]">
 					{	daycard &&
-						<div className="flex w-full h-full justify-center items-center">
+						<div className="flex justify-start items-start w-full h-full min-w-[350px] min-h-[350px]">
 							<div className="flex w-full justify-center items-center">
 								<Typography
 									id="modal-modal-title"
@@ -362,7 +359,6 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 									</div> 
 						</div>
 					}
-					</div>
 				</div>
 			}
 			{

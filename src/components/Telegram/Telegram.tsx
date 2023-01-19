@@ -22,7 +22,6 @@ import { Navigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { IComment, IDayCard, IFileData } from '../../interfaces/daycard.interface'
 import Modal from '@mui/material/Modal'
-import styles from './Telegram.module.css'
 
 export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element => {
 	const [daycard, setDayCard] = useState<IDayCard>()
@@ -149,11 +148,11 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 	}
 
 	return (
-		<div className="bg-black">
+		<div>
 			{
 				(tg.platform !== 'unknown') &&
 
-				<div className="">
+				<div className="bg-repeat bg-[url(./pics/stars.jpg)]">
 
 					<div className="flex justify-start items-start w-full h-full min-w-[350px] min-h-[350px]">
 					{	daycard &&

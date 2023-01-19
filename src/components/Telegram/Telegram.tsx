@@ -153,11 +153,7 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 			{
 				(tg.platform !== 'unknown') &&
 
-				<div className={styles.bgAnimation}>
-					<div id="stars"></div>
-					<div id="stars2"></div>
-					<div id="stars3"></div>
-					<div id="stars4"></div>
+				<div className="">
 
 					<div className="flex justify-start items-start w-full h-full min-w-[350px] min-h-[350px]">
 					{	daycard &&

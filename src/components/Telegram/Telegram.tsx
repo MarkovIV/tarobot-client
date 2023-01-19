@@ -153,8 +153,8 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 				(tg.platform !== 'unknown') &&
 
 				<div>
-					<div className="absolute left-0 top-0 flex justify-start items-start w-full h-full min-w-[350px] min-h-[350px]">	
-						<img className="object-cover w-full h-full" src={"../../pics/backgroundstars.jpg"} alt="Background" />
+					<div className="flex justify-start items-start w-full h-full min-w-[350px] min-h-[350px]">	
+						<img className="object-none w-full h-full" src={"../../pics/backgroundstars.jpg"} alt="Background" />
 					</div>
 					{	daycard &&
 						<div>

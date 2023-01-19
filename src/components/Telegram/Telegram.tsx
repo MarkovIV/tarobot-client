@@ -18,11 +18,13 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 			if (daycardLink) {
 				const res = await axios.get(daycardLink)
 				if (res) {
-					const decodedResData = JSON.parse(decodeURIComponent(res.data))
-					setDayCard(decodedResData)
+					// const decodedResData = JSON.parse(decodeURIComponent(res.data))
+					// setDayCard(decodedResData)
 
 					//debug
-					console.log('decodedResData', decodedResData)
+					console.log('daycardLink', daycardLink)
+					console.log('res', res)
+					console.log('res.data', res.data)
 				}
 			}
 		}

@@ -7,27 +7,24 @@ import { DaycardEdit } from '../DaycardEdit/DaycardEdit'
 import { Navigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 
-//debug
-const testURL = 'https://firebasestorage.googleapis.com/v0/b/tarobot-a9b31.appspot.com/o/package.json?alt=media&token=1f1a3387-f1b7-49e1-9189-3b6df11aa5f6'
-
 export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element => {
-	const [daycardURL, setDayCardURL] = useState<string>('')
-	const {onClose, tg, user} = useTelegram()
-	// const params = useParams()
-	// const daycardParams = params.daycardParams
-
-	// let decodedDayCardParams = {}
-	// if (daycardParams) {
-	// 	decodedDayCardParams = JSON.parse(decodeURIComponent(daycardParams))
-	// }
+	const [daycard, setDayCard] = useState<string>('')
+	const {onClose, tg} = useTelegram()
+	const params = useParams()
+	const daycardLink = params.daycardLink
 
 	useEffect(() => {
 		async function fetchData() {
-			const res = await axios.get(testURL)
-			setDayCardURL(res.data)
+			if (daycardLink) {
+				const res = await axios.get(daycardLink)
+				if (res) {
+					const decodedResData = JSON.parse(decodeURIComponent(res.data))
+					setDayCard(decodedResData)
 
-			//debug
-			console.log('daycardURL', res.data)
+					//debug
+					console.log('decodedResData', decodedResData)
+				}
+			}
 		}
 		fetchData()
 
@@ -36,7 +33,7 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 		tg.MainButton.hideProgress()
 		tg.expand()
 		tg.ready()
-	}, [tg, daycardURL])
+	}, [daycardLink, tg])
 
 	return (
 		<div>

@@ -18,7 +18,7 @@ export default function App() {
 		<MenuList />
 		<Routes>
 			<Route path="/admin" element={ <Page item="admin" /> } />
-			<Route path="/daycard/:daycardParams" element={ <Telegram /> } />
+			<Route path="/daycard/:daycardLink" element={ <Telegram /> } />
 			<Route path="/" element={ <Page /> } />
 			<Route path="*" element={ <Navigate to={"/"} /> } />
 		</Routes>

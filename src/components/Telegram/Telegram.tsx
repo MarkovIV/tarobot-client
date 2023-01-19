@@ -178,7 +178,7 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 							{dayjs().locale('ru').format('dd DD MMMM YYYY г.')}
 						</Typography>	
 					</div>
-					<div className="pt-8 pl-2 pr-2 opacity-80 overflow-auto pb-[100px]">
+					<div className="pt-8 pl-2 pr-2 opacity-80 overflow-auto pb-36">
 						<div className="relative flex justify-center items-center pb-4 w-full h-[300px]">
 							<div className="relative flex w-full h-full rounded-md border-2 border-inherit">
 								<div className="absolute left-0 top-0 flex justify-start items-start w-full h-full">	

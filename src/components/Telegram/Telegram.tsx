@@ -156,7 +156,7 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 
 					<div className="flex justify-start items-start w-full h-full min-w-[350px] min-h-[350px]">
 					{	daycard &&
-						<div>
+						<div className="flex w-full justify-center items-center">
 							<div className="flex w-full justify-center items-center">
 								<Typography
 									id="modal-modal-title"

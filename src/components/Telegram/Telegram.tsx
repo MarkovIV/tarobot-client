@@ -356,7 +356,13 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 							</Zoom>
 						</Modal>
 					</div> 
-					<div className="absolute top-0 left-0 right-0 bottom-0 bg-repeat bg-[url(./pics/stars.jpg)] -z-50"></div>
+					<div className="absolute top-0 left-0 right-0 bottom-0 bg-repeat bg-[url(./pics/stars.jpg)] -z-50">
+						<img 
+							className="object-fill w-full h-full"
+							src="./pics/stars.jpg"
+							alt="Background"
+						></img>
+					</div>
 				</div>
 			}
 			{

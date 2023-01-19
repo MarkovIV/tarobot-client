@@ -152,8 +152,8 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 			{
 				(tg.platform !== 'unknown') && daycard &&
 
-				<div className="relative flex-col h-full w-full bg-repeat bg-[url(./pics/stars.jpg)] min-w-[350px] min-h-[350px]">
-					<div className="flex w-full justify-center items-center z-50">
+				<div className="flex-col h-full w-full bg-repeat bg-[url(./pics/stars.jpg)] min-w-[350px] min-h-[350px]">
+					<div className="flex w-full justify-center items-center">
 						<Typography
 							id="modal-modal-title"
 							variant="h6"
@@ -168,7 +168,7 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 							Карта дня
 						</Typography>
 					</div>
-					<div className="flex w-full justify-center items-center z-50">
+					<div className="flex w-full justify-center items-center">
 						<Typography
 							variant="subtitle1"
 							gutterBottom
@@ -178,7 +178,7 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 							{dayjs().locale('ru').format('dd DD MMMM YYYY г.')}
 						</Typography>	
 					</div>
-					<div className="pt-8 pl-2 pr-2 opacity-80 overflow-auto z-50">
+					<div className="pt-8 pl-2 pr-2 opacity-80 overflow-auto pb-[100px]">
 						<div className="relative flex justify-center items-center pb-4 w-full h-[300px]">
 							<div className="relative flex w-full h-full rounded-md border-2 border-inherit">
 								<div className="absolute left-0 top-0 flex justify-start items-start w-full h-full">	
@@ -356,13 +356,6 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 							</Zoom>
 						</Modal>
 					</div> 
-					<div className="absolute top-0 left-0 right-0 bottom-0 bg-repeat bg-[url(./pics/stars.jpg)] -z-50">
-						<img 
-							className="object-fill w-full h-full"
-							src="./pics/stars.jpg"
-							alt="Background"
-						></img>
-					</div>
 				</div>
 			}
 			{

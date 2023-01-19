@@ -152,7 +152,7 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 			{
 				(tg.platform !== 'unknown') && daycard &&
 
-				<div className="flex-col h-full bg-repeat bg-[url(./pics/stars.jpg)] min-w-[350px] min-h-[350px]">
+				<div className="flex-col h-full w-full bg-repeat bg-[url(./pics/stars.jpg)] min-w-[350px] min-h-[350px]">
 					<div className="flex w-full justify-center items-center">
 						<Typography
 							id="modal-modal-title"

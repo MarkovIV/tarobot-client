@@ -10,6 +10,8 @@ export interface IClient {
 	dateTo: string
 	description: string
 	daycards: IDayCard[]
+	deliverTheCard: boolean
+	deliverComments: boolean
 }
 
 export interface IClientTable {

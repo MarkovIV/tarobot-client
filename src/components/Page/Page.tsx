@@ -61,7 +61,8 @@ export const Page = ({ item = "daycard", className, ...props }: PageProps): JSX.
 					dateTo: items[item].dateTo,
 					description: items[item].description,
 					daycards: items[item].daycards,
-					groups: items[item].groups
+					deliverTheCard: items[item].deliverTheCard,
+					deliverComments: items[item].deliverComments
 				}	
 				newState.push(newClient)		
 			}

@@ -229,6 +229,8 @@ export const DaycardEdit = ({ onClose, view, clientId, date, className, ...props
 			}
 			if (daycardId !== null) {
 				daycardsRef.child(clientId).child('daycards').child(daycardId + '/comments').push(newComment)
+
+				daycardsRef.child(clientId).child('deliverComments').set(true)
 			} else {
 				const daycard = {
 					date: dayjs(date).format('DD.MM.YYYY')
@@ -238,6 +240,8 @@ export const DaycardEdit = ({ onClose, view, clientId, date, className, ...props
 					const newDaycardId = res.key
 
 					daycardsRef.child(clientId).child('daycards').child(newDaycardId + '/comments').push(newComment)
+
+					daycardsRef.child(clientId).child('deliverComments').set(true)
 				})
 			}
 		}
@@ -445,8 +449,7 @@ export const DaycardEdit = ({ onClose, view, clientId, date, className, ...props
 			if (daycardId !== null) {
 				daycardsRef.child(clientId).child('daycards').child(daycardId).child('daycardSent').set(true)
 
-
-				// !!!!!!!!!!!
+				daycardsRef.child(clientId).child('deliverTheCard').set(true)
 
 				onClose()
 			} else {

@@ -101,14 +101,14 @@ export const DayCard = ({ className, ...props }: DayCardProps): JSX.Element => {
 			if (client.dateTo === '') {
 				return true
 			} else {
-				return day.isBefore(dayjs(client.dateTo, "DD-MM-YYYY")) || day.isSame(dayjs(client.dateTo, "DD-MM-YYYY"))
+				return day.isBefore(dayjs(client.dateTo, "DD-MM-YYYY")) || day.isSame(dayjs(client.dateTo, "DD-MM-YYYY"), 'day')
 			}
 		} else {
 			if (client.dateTo === '') {
-				return day.isAfter(dayjs(client.dateFrom, "DD-MM-YYYY")) || day.isSame(dayjs(client.dateFrom, "DD-MM-YYYY"))
+				return day.isAfter(dayjs(client.dateFrom, "DD-MM-YYYY")) || day.isSame(dayjs(client.dateFrom, "DD-MM-YYYY"), 'day')
 			} else {
-				return	(day.isBefore(dayjs(client.dateTo, "DD-MM-YYYY")) || day.isSame(dayjs(client.dateTo, "DD-MM-YYYY"))) &&
-						(day.isAfter(dayjs(client.dateFrom, "DD-MM-YYYY")) || day.isSame(dayjs(client.dateFrom, "DD-MM-YYYY")))
+				return	(day.isBefore(dayjs(client.dateTo, "DD-MM-YYYY")) || day.isSame(dayjs(client.dateTo, "DD-MM-YYYY"), 'day')) &&
+						(day.isAfter(dayjs(client.dateFrom, "DD-MM-YYYY")) || day.isSame(dayjs(client.dateFrom, "DD-MM-YYYY"), 'day'))
 			}
 		}
 	}

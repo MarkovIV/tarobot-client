@@ -33,16 +33,10 @@ export const DaycardLink = ({ className, ...props }: DaycardLinkProps): JSX.Elem
 	const daycardLink = params.daycardLink
 
 	useEffect(() => {
-		//debug
-		console.log('daycardLink', daycardLink)
-
 		async function fetchData() {
 			if (daycardLink) {
 				const res = await axios.get(daycardLink)
 				if (res) {
-					//debug
-					console.log('res', res)
-
 					setDayCard(res.data)
 				}
 			}
@@ -359,11 +353,6 @@ export const DaycardLink = ({ className, ...props }: DaycardLinkProps): JSX.Elem
 						</Modal>
 					</div> 
 				</div>
-			}
-			{
-				!daycard &&
-
-				<Navigate to={"/"} />
 			}
 		</div>
 	)

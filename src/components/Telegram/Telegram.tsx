@@ -359,7 +359,7 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 				</div>
 			}
 			{
-				((tg.platform === 'unknown') || !daycard) &&
+				(tg.platform === 'unknown') &&
 
 				<Navigate to={"/"} />
 			}

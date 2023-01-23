@@ -9,6 +9,7 @@ import { MenuList } from './components/MenuList/MenuList'
 import { Navbar } from './components/Navbar/Navbar'
 import { Page } from './components/Page/Page'
 import { Telegram } from './components/Telegram/Telegram'
+import { DaycardLink } from './components/DaycardLink/DaycardLink'
 
 export default function App() {
 
@@ -19,6 +20,7 @@ export default function App() {
 		<Routes>
 			<Route path="/admin" element={ <Page item="admin" /> } />
 			<Route path="/daycard/:daycardLink" element={ <Telegram /> } />
+			<Route path="/daycardLink/:daycardLink" element={ <DaycardLink /> } />
 			<Route path="/" element={ <Page /> } />
 			<Route path="*" element={ <Navigate to={"/"} /> } />
 		</Routes>

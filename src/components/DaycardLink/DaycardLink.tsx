@@ -1,6 +1,5 @@
-import { TelegramProps } from './Telegram.props'
+import { DaycardLinkProps } from './DaycardLink.props'
 import Typography from '@mui/material/Typography'
-import { useTelegram } from '../../hooks/useTelegram'
 import { useEffect, useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import AudioPlayer from 'react-h5-audio-player'
@@ -23,14 +22,13 @@ import axios from 'axios'
 import { IComment, IDayCard, IFileData } from '../../interfaces/daycard.interface'
 import Modal from '@mui/material/Modal'
 
-export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element => {
+export const DaycardLink = ({ className, ...props }: DaycardLinkProps): JSX.Element => {
 	const [daycard, setDayCard] = useState<IDayCard>()
 	const [photoWidth, setPhotoWidth] = useState<number>()
 	const [photoHeight, setPhotoHeight] = useState<number>()
 	const [photoWindow, setPhotoWindow] = useState<boolean>(false)
 	const [expanded, setExpanded] = useState<string | false>(false)
 	const photoRef = useRef(null)
-	const {onClose, tg} = useTelegram()
 	const params = useParams()
 	const daycardLink = params.daycardLink
 
@@ -43,18 +41,16 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 				}
 			}
 		}
-		fetchData()
-
-		tg.MainButton.hide()
-		tg.MainButton.disable()
-		tg.MainButton.hideProgress()
-		tg.expand()
-		tg.ready()
-	}, [daycardLink, tg])
+		fetchData()	
+	}, [daycardLink])
 
 	const handleOpenPhotoWindow = () => setPhotoWindow(true)
 
 	const handleClosePhotoWindow = () => setPhotoWindow(false)
+
+	const onCloseHandle = () => {
+		window.close()
+	}
 
 	const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
@@ -150,7 +146,7 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 	return (
 		<div>
 			{
-				(tg.platform !== 'unknown') && daycard &&
+				daycard &&
 
 				<div className="flex-col h-full w-full bg-repeat bg-[url(./pics/stars.jpg)] min-w-[350px] min-h-[350px]">
 					<div className="flex w-full justify-center items-center">
@@ -311,7 +307,7 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 											alignSelf: 'center',
 											color: '#e0e0e0'
 										}}
-										onClick={onClose}
+										onClick={onCloseHandle}
 									>
 										<CheckCircleIcon />
 									</IconButton>
@@ -359,7 +355,7 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 				</div>
 			}
 			{
-				((tg.platform === 'unknown') || !daycard) &&
+				!daycard &&
 
 				<Navigate to={"/"} />
 			}

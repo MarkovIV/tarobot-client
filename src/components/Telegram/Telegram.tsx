@@ -22,6 +22,8 @@ import { Navigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { IComment, IDayCard, IFileData } from '../../interfaces/daycard.interface'
 import Modal from '@mui/material/Modal'
+import { useAppDispatch } from '../../store/hooks'
+import { toggleFooterTo } from '../../store/footerSlice'
 
 export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element => {
 	const [daycard, setDayCard] = useState<IDayCard>()
@@ -33,8 +35,11 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 	const {onClose, tg} = useTelegram()
 	const params = useParams()
 	const daycardLink = params.daycardLink
+	const dispatch = useAppDispatch()
 
 	useEffect(() => {
+		if (tg.platform !== 'unknown') dispatch(toggleFooterTo({footer: false}))
+
 		async function fetchData() {
 			if (daycardLink) {
 				const res = await axios.get(daycardLink)
@@ -50,7 +55,7 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 		tg.MainButton.hideProgress()
 		tg.expand()
 		tg.ready()
-	}, [daycardLink, tg])
+	}, [daycardLink, dispatch, tg])
 
 	const handleOpenPhotoWindow = () => setPhotoWindow(true)
 

@@ -1,14 +1,14 @@
 import { FooterProps } from './Footer.props'
 import Typography from '@mui/material/Typography'
 import CopyrightIcon from '@mui/icons-material/Copyright'
-import { useTelegram } from '../../hooks/useTelegram'
+import { useAppSelector } from '../../store/hooks'
 
 export const Footer = ({ className, ...props }: FooterProps): JSX.Element => {
-	const {tg} = useTelegram()
+	const footer = useAppSelector(state => state.footer)
 
 	return (
 		<div>
-			{	(tg.platform === 'unknown') &&
+			{	footer &&
 
 				<div className="fixed z-20 bottom-5 left-3 flex flex-nowrap h-10 min-w-max bg-inherit w-full text-gray-300">
 					<div className="mr-1">

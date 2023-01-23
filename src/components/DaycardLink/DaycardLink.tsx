@@ -17,10 +17,12 @@ import AttachFileIcon from '@mui/icons-material/AttachFile'
 import Zoom from '@mui/material/Zoom'
 import ChatIcon from '@mui/icons-material/Chat'
 import CheckIcon from '@mui/icons-material/Check'
-import { Navigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { IComment, IDayCard, IFileData } from '../../interfaces/daycard.interface'
 import Modal from '@mui/material/Modal'
+import { useAppDispatch } from '../../store/hooks'
+import { toggleFooterTo } from '../../store/footerSlice'
 
 export const DaycardLink = ({ className, ...props }: DaycardLinkProps): JSX.Element => {
 	const [daycard, setDayCard] = useState<IDayCard>()
@@ -31,8 +33,11 @@ export const DaycardLink = ({ className, ...props }: DaycardLinkProps): JSX.Elem
 	const photoRef = useRef(null)
 	const params = useParams()
 	const daycardLink = params.daycardLink
+	const dispatch = useAppDispatch()
 
 	useEffect(() => {
+		dispatch(toggleFooterTo({footer: false}))
+		
 		async function fetchData() {
 			if (daycardLink) {
 				const res = await axios.get(daycardLink)
@@ -42,7 +47,7 @@ export const DaycardLink = ({ className, ...props }: DaycardLinkProps): JSX.Elem
 			}
 		}
 		fetchData()	
-	}, [daycardLink])
+	}, [daycardLink, dispatch])
 
 	const handleOpenPhotoWindow = () => setPhotoWindow(true)
 

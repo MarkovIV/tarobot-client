@@ -4,7 +4,7 @@ import CopyrightIcon from '@mui/icons-material/Copyright'
 import { useAppSelector } from '../../store/hooks'
 
 export const Footer = ({ className, ...props }: FooterProps): JSX.Element => {
-	const footer = useAppSelector(state => state.footer)
+	const footer = useAppSelector(state => state.footer.footer)
 
 	return (
 		<div>

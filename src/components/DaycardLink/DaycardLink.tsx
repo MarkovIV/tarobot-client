@@ -54,7 +54,7 @@ export const DaycardLink = ({ className, ...props }: DaycardLinkProps): JSX.Elem
 	const handleClosePhotoWindow = () => setPhotoWindow(false)
 
 	const onCloseHandle = () => {
-		const newWindow = window.open('', '_self', "width=100,height=100,noreferrer=true")
+		const newWindow = window.open('', '_self')
 		newWindow?.close()
 	}
 

@@ -25,7 +25,6 @@ export const ClientEdit = ({ onClose, clientId, className, ...props }: ClientEdi
 	const [dateFromError, setDateFromError] = useState<boolean>(false)
 	const [description, setDescription] = useState<string>('')
 	const [daycards, setDaycards] = useState<IDayCard[]>()
-	const [greatingEdited, setGreatingEdited] = useState<boolean>(false)
 	const clients = useAppSelector(state => state.clients.clients)
 	const login = useAppSelector(state => state.login)
 
@@ -51,14 +50,6 @@ export const ClientEdit = ({ onClose, clientId, className, ...props }: ClientEdi
 		if (!login.logged) onClose()
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [login.logged])
-
-	useEffect(() => {
-		if (!greatingEdited && !greating) {
-			if (firstName.trim().length !== 0) setGreating(`Добрый день, ${firstName}!`)
-			else setGreating('')
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [firstName])
 
 	const changeDateTo = (newValue: Dayjs | null) => {
 		setDateTo(newValue)
@@ -88,10 +79,8 @@ export const ClientEdit = ({ onClose, clientId, className, ...props }: ClientEdi
 		const newGreating = event.target.value
 
 		if (newGreating.trim().length !== 0) {
-			setGreatingEdited(true)
 			setGreating(newGreating)
 		} else {
-			setGreatingEdited(false)
 			if (firstName.trim().length !== 0) {
 				setGreating(`Добрый день, ${firstName}!`)
 			} else {

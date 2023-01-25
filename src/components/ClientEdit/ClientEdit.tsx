@@ -53,7 +53,7 @@ export const ClientEdit = ({ onClose, clientId, className, ...props }: ClientEdi
 	}, [login.logged])
 
 	useEffect(() => {
-		if (!greatingEdited) {
+		if (!greatingEdited && !greating) {
 			if (firstName.trim().length !== 0) setGreating(`Добрый день, ${firstName}!`)
 			else setGreating('')
 		}

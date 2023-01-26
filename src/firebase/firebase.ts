@@ -86,6 +86,26 @@ export const uploadFile = async (path: string, filesArray: File[]) => {
 	return filesData
 }
 
+export const uploadBlobAudio = async (path: string, blob: any) => {		
+	let fileData: IFileData | undefined
+
+	const fileRef = ref(storage, `${path}/audio.wav`)
+	
+	try {
+		await uploadBytes(fileRef, blob)
+
+		const url = await getDownloadURL(fileRef)
+
+		fileData = {
+			name: 'audio.wav',
+			link: url
+		}
+	} catch (e) {
+		console.log(e)
+	}	
+	return fileData
+}
+
 export const deleteFilesFromStorage = (fileReference: StorageReference): Promise<void> => {
 	return listAll(fileReference)
 		.then(res => {

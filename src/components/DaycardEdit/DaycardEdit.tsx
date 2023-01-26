@@ -20,7 +20,7 @@ import CheckIcon from '@mui/icons-material/Check'
 import dayjs, { Dayjs } from 'dayjs'
 import { useAppSelector } from '../../store/hooks'
 import { useState, useRef, useEffect } from 'react'
-import { daycardsRef, storage, uploadFile, deleteFilesFromStorage, getClientDayCardKey } from '../../firebase/firebase'
+import { daycardsRef, storage, uploadFile, deleteFilesFromStorage, getClientDayCardKey, uploadBlobAudio } from '../../firebase/firebase'
 import AudioPlayer from 'react-h5-audio-player'
 import 'react-h5-audio-player/lib/styles.css'
 import { IComment, IDayCard, IFileData } from '../../interfaces/daycard.interface'
@@ -37,12 +37,15 @@ import Textarea from '@mui/joy/Textarea'
 import { sortFileNames } from '../../helpers/helpers'
 import { ref } from "firebase/storage"
 import { ModalMessage } from '../ModalMessage/ModalMessage'
+import KeyboardVoiceRoundedIcon from '@mui/icons-material/KeyboardVoiceRounded'
+import { AudioRecorder } from 'react-audio-voice-recorder'
 
 export const DaycardEdit = ({ onClose, view, clientId, date, className, ...props }: DaycardEditProps): JSX.Element => {
 	const [description, setDescription] = useState<string>('')
 	const [adminComments, setAdminComments] = useState<string>('')
 	const [comments, setComments] = useState<string>('')
 	const [photoWindow, setPhotoWindow] = useState<boolean>(false)
+	const [recordWindow, setRecordWindow] = useState<boolean>(false)
 	const [descriptionEditWindow, setDescriptionEditWindow] = useState<boolean>(false)
 	const [adminCommentsEditWindow, setAdminCommentsEditWindow] = useState<boolean>(false)
 	const [commentsEditWindow, setCommentsEditWindow] = useState<boolean>(false)
@@ -52,6 +55,8 @@ export const DaycardEdit = ({ onClose, view, clientId, date, className, ...props
 	const clients = useAppSelector(state => state.clients.clients)
 	const [expanded, setExpanded] = useState<string | false>(false)
 	const photoRef = useRef(null)
+	const [audioPlayer, setAudioPlayer] = useState<any>()
+	const [blobAudio, setBlobAudio] = useState<any>()
 	const login = useAppSelector(state => state.login)
 
 	useEffect(() => {
@@ -70,6 +75,19 @@ export const DaycardEdit = ({ onClose, view, clientId, date, className, ...props
 	const handleOpenPhotoWindow = () => setPhotoWindow(true)
 
 	const handleClosePhotoWindow = () => setPhotoWindow(false)
+
+	const handleOpenRecordWindow = () => setRecordWindow(true)
+
+	const handleCloseRecordWindow = () => {
+		setRecordWindow(false)
+		setAudioPlayer(undefined)
+		setBlobAudio(undefined)
+	}
+
+	const handleSaveRecord = () => {
+		saveAudioBlob()
+		handleCloseRecordWindow()
+	}
 
 	const closeModalMessage = () => {
 		setModalMessage('')
@@ -173,6 +191,50 @@ export const DaycardEdit = ({ onClose, view, clientId, date, className, ...props
 			if (filedata.length > 0) {
 				daycardsRef.child(audioPath).child('link').set(filedata[0].link)
 				daycardsRef.child(audioPath).child('name').set(filedata[0].name)
+			} else {
+				daycardsRef.child(audioPath).remove()
+			}
+		}
+	}
+
+	const saveAudioBlob = async () => {
+		if (date === null) {
+			return
+		}
+		const daycardId = getClientDayCardKey(clients, clientId, date)
+		let filedata: IFileData | undefined
+
+		if (daycardId !== null) {
+			const path = clientId + '/' + daycardId + '/audio/'
+			const fileRef = ref(storage, path)
+
+			if (fileRef) {
+				await deleteFilesFromStorage(fileRef)
+			}
+			if (blobAudio) {
+				filedata = await uploadBlobAudio(path, blobAudio)
+			}
+			const audioPath = clientId + '/daycards/' + daycardId + '/audio'
+			if (filedata) {
+				daycardsRef.child(audioPath).child('link').set(filedata.link)
+				daycardsRef.child(audioPath).child('name').set(filedata.name)
+			} else {
+				daycardsRef.child(audioPath).remove()
+			}
+		} else {
+			const daycard = { date: dayjs(date).format('DD.MM.YYYY') }
+			
+			const res = await daycardsRef.child(clientId + '/daycards').push(daycard)
+			const newDaycardId = res.key
+
+			const path = clientId + '/' + newDaycardId + '/audio/'
+			if (blobAudio) {
+				filedata = await uploadBlobAudio(path, blobAudio)
+			}
+			const audioPath = clientId + '/daycards/' + newDaycardId + '/audio'
+			if (filedata) {
+				daycardsRef.child(audioPath).child('link').set(filedata.link)
+				daycardsRef.child(audioPath).child('name').set(filedata.name)
 			} else {
 				daycardsRef.child(audioPath).remove()
 			}
@@ -465,6 +527,19 @@ export const DaycardEdit = ({ onClose, view, clientId, date, className, ...props
 		}
 	}
 
+	const addAudioElement = (blob: any) => {
+		const url = URL.createObjectURL(blob)
+		const audioElement = 
+			<AudioPlayer
+				autoPlay = {false}
+				src={url}
+				onPlay={e => {}}
+			/>
+
+		setAudioPlayer(audioElement)
+		setBlobAudio(blob)
+	}
+
 	return (
 		<div className="pt-8 pl-2 pr-2 opacity-80 overflow-auto">
 			<div className="relative flex justify-center items-center pb-4 w-full h-[300px]">
@@ -548,6 +623,21 @@ export const DaycardEdit = ({ onClose, view, clientId, date, className, ...props
 										className="w-[0.1px] h-[0.1px] opacity-0 absolute -z-30"
 									/>
 								</label>
+							</IconButton>
+						</div>
+						<div className="pl-2">
+							<IconButton
+								size="large"
+								disableRipple
+								aria-label="audioRecord"
+								sx={{
+									backgroundColor: 'white',
+									color: 'black',
+									opacity: '90%'
+								}}
+								onClick={handleOpenRecordWindow}
+							>
+								<KeyboardVoiceRoundedIcon />	
 							</IconButton>
 						</div>
 					</div>
@@ -979,6 +1069,61 @@ export const DaycardEdit = ({ onClose, view, clientId, date, className, ...props
 								color: 'black'
 							}}
 							onClick={handleSaveComments}
+						>
+							<SaveIcon />
+						</IconButton>
+					</div>
+				</DialogActions>
+			</Dialog>
+			<Dialog
+				open={recordWindow}
+				onClose={handleCloseRecordWindow}
+				scroll={'paper'}
+				aria-labelledby="scroll-dialog-title"
+				aria-describedby="scroll-dialog-description"
+				fullWidth={true}
+        		maxWidth={'sm'}
+			>
+				<DialogTitle id="scroll-dialog-title">
+					<div className="w-full text-center">
+						Аудиозапись
+					</div>
+				</DialogTitle>
+				<DialogContent dividers>
+					<div className="flex-col w-full justify-center items-center">
+						<div className="flex w-full justify-center items-center pt-2">
+							<AudioRecorder onRecordingComplete={addAudioElement} />
+						</div>
+						<div className="flex w-full pt-6 justify-center items-center pb-2">
+							{audioPlayer}
+						</div>
+					</div>
+				</DialogContent>
+				<DialogActions>
+					<div className="flex p-0">
+						<IconButton
+							size="large"
+							edge="start"
+							aria-label="cancel"
+							sx={{
+								alignSelf: 'center',
+								color: 'black'
+							}}
+							onClick={handleCloseRecordWindow}
+						>
+							<CancelIcon />
+						</IconButton>
+					</div>
+					<div className="flex p-0 pl-2">
+						<IconButton
+							size="large"
+							edge="start"
+							aria-label="save"
+							sx={{
+								alignSelf: 'center',
+								color: 'black'
+							}}
+							onClick={handleSaveRecord}
 						>
 							<SaveIcon />
 						</IconButton>

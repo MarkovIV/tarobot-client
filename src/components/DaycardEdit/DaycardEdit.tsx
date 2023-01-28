@@ -59,6 +59,12 @@ export const DaycardEdit = ({ onClose, view, clientId, date, className, ...props
 	const [blobAudio, setBlobAudio] = useState<any>()
 	const login = useAppSelector(state => state.login)
 
+	//debug
+	useEffect(() => {
+		// console.log('clientId', clientId)
+		// console.log('date', date?.format('DDMMYYYY'))
+	},[clientId, date])
+
 	useEffect(() => {
 		if (!login.logged) onClose()
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -897,15 +903,15 @@ export const DaycardEdit = ({ onClose, view, clientId, date, className, ...props
 				sx={{ relative: 'true' }}
 			>
 				<Zoom in={photoWindow}>
-					<div className="flex justify-start items-start w-full h-full overflow-auto">
+					<div className="flex justify-center items-center w-full h-full overflow-auto">
 						<img
 							ref={photoRef}
-							className="object-none object-left-top max-w-none"
+							className="object-contain object-center"
 							src={getClientDayCardPhoto(clientId, date)}
 							alt="Card"
-							onLoad={updatePhotoSizes}
+							// onLoad={updatePhotoSizes}
 						/>
-						<div className="absolute right-0 bottom-0 pr-2 pb-2">
+						<div className="absolute right-0 bottom-0 pr-6 pb-6">
 							<IconButton
 								size="large"
 								edge="start"

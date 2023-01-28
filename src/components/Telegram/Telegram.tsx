@@ -331,13 +331,13 @@ export const Telegram = ({ className, ...props }: TelegramProps): JSX.Element =>
 							sx={{ relative: 'true' }}
 						>
 							<Zoom in={photoWindow}>
-								<div className="flex justify-start items-start w-full h-full overflow-auto">
+								<div className="flex justify-center items-center w-full h-full overflow-auto">
 									<img
 										ref={photoRef}
-										className="object-none object-left-top max-w-none"
+										className="object-contain object-center"
 										src={getClientDayCardPhoto()}
 										alt="Card"
-										onLoad={updatePhotoSizes}
+										// onLoad={updatePhotoSizes}
 									/>
 									<div className="absolute right-0 bottom-0 pr-2 pb-2">
 										<IconButton

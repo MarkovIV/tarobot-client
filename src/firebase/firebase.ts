@@ -97,7 +97,7 @@ export const uploadBlobAudio = async (path: string, blob: any) => {
 		const url = await getDownloadURL(fileRef)
 
 		fileData = {
-			name: 'audio.mp3',
+			name: 'audio.wav',
 			link: url
 		}
 	} catch (e) {
